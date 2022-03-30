@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+	<title>Default</title>
+	<style>
+		html {
+			height:100%;
+		}
+		body {
+			background-color:#000;
+			margin:0;
+			height:100%;
+		}
+	</style>
+	<!-- copy these lines to your document head: -->
+
+	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, viewport-fit=cover, width=device-width" />
+	<link href='https://fonts.googleapis.com/css?family=Cinzel&subset=latin' rel='stylesheet' type='text/css'>
+	
+	<style>
+		html {
+			pointer-events: none;
+		}
+	</style>
+	
+	<script>
+		/*
+		
+		if (window.matchMedia("(max-width : 375px)").matches && window.matchMedia("(max-height : 812px)").matches) {
+    			//hypeDocument.showLayoutNamed('iPhone 13 Mini')
+    			return 'iPhone 13 Mini';
+  			} else if (window.matchMedia("(max-width : 414px)").matches && window.matchMedia("(min-height : 896px)").matches) {
+    			//hypeDocument.showLayoutNamed('iPhone 11')
+    			return 'iPhone 11';
+  			}
+		
+		*/
+	
+		function callBack(hypeDocument, element, event) {
+        	window.hypeDocument = hypeDocument;
+    	}
+    	
+    	function layoutRequest(hypeDocument, element, event) {
+        	if (window.matchMedia("(max-width : 375px) and (min-height : 812px)").matches) {
+    			//hypeDocument.showLayoutNamed('iPhone 13 Mini')
+    			return 'iPhone 13 Mini';
+  			} else if (window.matchMedia("(max-width : 414px) and (min-height : 896px)").matches) {
+    			//hypeDocument.showLayoutNamed('iPhone 11')
+    			return 'iPhone 11';
+  			}
+    	}
+
+    	if ("HYPE_eventListeners" in window === false) {
+        	window.HYPE_eventListeners = Array();
+    	}
+    	window.HYPE_eventListeners.push({"type": "HypeDocumentLoad", "callback": callBack});
+    	window.HYPE_eventListeners.push({"type": "HypeLayoutRequest", "callback": layoutRequest});
+		
+		let settingsAnimPlayed = false;
+		let currentLockTimelineTime = 0.0;
+	</script>
+	
+
+	<!-- end copy -->
+  </head>
+  <body>
+	<!-- copy these lines to your document: -->
+
+	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?14173"></script>
+	</div>
+
+	<!-- end copy -->
+	
+
+
+	<!-- text content for search engines: -->
+
+	<div style="display:none" aria-hidden=true>
+
+		<div></div>
+		<div>(for Apple Watch)</div>
+		<div>BetterSpotify
+</div>
+		<div>Gallery
+</div>
+		<div>800 McKinley Monument Drive NW
+Canton, OH 44708</div>
+		<div>Login/signup
+</div>
+		<div>Phone: 330-455-7043
+Email: Info@McKinleyMuseum.org
+</div>
+		<div>opening hours: Tue-Sat 9 a.m.-4 p.m.
+</div>
+		<div>Settings
+</div>
+
+	</div>
+
+	<!-- end text content: -->
+
+  </body>
+</html>
