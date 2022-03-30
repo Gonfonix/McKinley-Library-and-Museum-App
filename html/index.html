@@ -26,22 +26,11 @@
 	</style>
 	
 	<script>
-		/*
-		
-		if (window.matchMedia("(max-width : 375px)").matches && window.matchMedia("(max-height : 812px)").matches) {
-    			//hypeDocument.showLayoutNamed('iPhone 13 Mini')
-    			return 'iPhone 13 Mini';
-  			} else if (window.matchMedia("(max-width : 414px)").matches && window.matchMedia("(min-height : 896px)").matches) {
-    			//hypeDocument.showLayoutNamed('iPhone 11')
-    			return 'iPhone 11';
-  			}
-		
-		*/
-	
 		function callBack(hypeDocument, element, event) {
         	window.hypeDocument = hypeDocument;
     	}
     	
+    	// Handle custom layouts
     	function layoutRequest(hypeDocument, element, event) {
         	if (window.matchMedia("(max-width : 375px) and (min-height : 812px)").matches) {
     			//hypeDocument.showLayoutNamed('iPhone 13 Mini')
@@ -69,7 +58,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?14173"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?50635"></script>
 	</div>
 
 	<!-- end copy -->
