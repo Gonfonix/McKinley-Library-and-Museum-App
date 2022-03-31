@@ -4,6 +4,8 @@ The McKinley Library and Museum App is a mobile app that provides information ab
 
 Nothing confidential will be shown in this repo. Again, the final app for this project will act as a template for the final product.
 
+This team project was the senior project in CSC 492 at the University of Mount Union.
+
 [^1]: This feature may not be fully fleshed out due to poor communication with the McKinley Presidential Library and Museum.
 [^2]: Due to no access to the user database used by the Museum and their payment system, this will be shown through a "demo" or "template."
 [^3]: Again, this will be shown through a "demo" or "template."
