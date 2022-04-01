@@ -26,10 +26,12 @@
 	</style>
 	
 	<script>
+		// Global Variables
 		var currentNavMenuTimelinePos = 0;
 		var currentMainTimelinePos = 0;
 		var timeLineFPS = 120;
 		var navMenuOpening = true;
+		
 		function callBack(hypeDocument, element, event) {
             window.hypeDocument = hypeDocument;
 
@@ -113,11 +115,9 @@
     	if ("HYPE_eventListeners" in window === false) {
         	window.HYPE_eventListeners = Array();
     	}
+    	
     	window.HYPE_eventListeners.push({"type": "HypeDocumentLoad", "callback": callBack});
     	window.HYPE_eventListeners.push({"type": "HypeLayoutRequest", "callback": layoutRequest});
-		
-		let settingsAnimPlayed = false;
-		let currentLockTimelineTime = 0.0;
 	</script>
 	
 
@@ -127,7 +127,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?30415"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?61681"></script>
 	</div>
 
 	<!-- end copy -->
