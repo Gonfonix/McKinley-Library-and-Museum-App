@@ -19,18 +19,93 @@
 	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, viewport-fit=cover, width=device-width" />
 	<link href='https://fonts.googleapis.com/css?family=Cinzel&subset=latin' rel='stylesheet' type='text/css'>
 	
-	<style>
-		html {
+	<!--<style>
+		* {
 			pointer-events: none;
 		}
-	</style>
+	</style>-->
 	
 	<script>
+		// Global Variables
+		var currentNavMenuTimelinePos = 0;
+		var currentMainTimelinePos = 0;
+		var timeLineFPS = 120; // The framerate of certain timeline animations; does work but Pro Motion still won't detect the higher framerates.
+		var navMenuOpening = true;
+		
+		/*
+		 * The Function Called on Document Load
+		*/
 		function callBack(hypeDocument, element, event) {
-        	window.hypeDocument = hypeDocument;
-    	}
+            window.hypeDocument = hypeDocument;
+
+
+			 // CustomBehaviorTicker - Adjust the way behaviors are played
+			 // Source: https://forums.tumult.com/t/extend-tumult-hype-with-javascript-hypedocument-extensions/6847/12
+			 
+            /*
+             * hypeDocument.startCustomBehaviourTicker 1.1
+             * @param {String} behaviour name to fire
+             * @param {Number} time in seconds (can be fractional)
+             * @param {Object} Some optional settings like pattern
+            */
+            hypeDocument.startCustomBehaviourTicker = function(behaviour, time, opt) {
+                var fnc;
+                if (behaviour == null || time == null) return;
+                if (!this.hasOwnProperty('_ticker')) {
+                    this._ticker = {}
+                }
+                if (!this._ticker.hasOwnProperty(behaviour)) {
+                    var interval = (time.hasOwnProperty('FPS')) ? 1000 / time.FPS : time * 1000;
+                    opt = opt ? opt : {};
+                    if (opt.hasOwnProperty('pattern')) {
+                        opt._buf = opt.pattern.slice(0);
+                        if (opt.countdown == null) opt.countdown = Infinity;
+                        fnc = function() {
+                            if (opt._buf.length == 0) opt._buf = opt.pattern.slice(0);
+                            if (opt._buf.shift()) hypeDocument.triggerCustomBehaviorNamed(behaviour);
+                        }
+                    } else {
+                        fnc = function() {
+                            hypeDocument.triggerCustomBehaviorNamed(behaviour);
+                        }
+                    }
+                    this._ticker[behaviour] = setInterval(fnc, interval);
+                    if (!opt.omitFirst) fnc();
+                }
+            }
+
+            /*
+             * hypeDocument.stopCustomBehaviourTicker
+             * @param {String} behaviour name to stop firering
+            */
+            hypeDocument.stopCustomBehaviourTicker = function(behaviour) {
+                if (this.hasOwnProperty('_ticker')) {
+                    if (this._ticker.hasOwnProperty(behaviour)) {
+                        clearInterval(this._ticker[behaviour]);
+                        delete this._ticker[behaviour];
+                    }
+                }
+            }
+
+            /*
+             * hypeDocument.stopAllCustomBehaviourTicker
+             * @require stopCustomBehaviourTicker
+            */
+            hypeDocument.stopAllCustomBehaviourTicker = function() {
+                if (this.hasOwnProperty('_ticker')) {
+                    for (var behaviour in this._ticker) {
+                        this.stopCustomBehaviourTicker(behaviour);
+                    }
+                }
+            }
+
+
+            return true;
+        }
     	
-    	// Handle custom layouts
+    	/* Handle Custom Layouts
+    	 * i.e. iPhone 13 Mini. iPhone X, iPhone 11, iPhone XR, etc
+    	*/
     	function layoutRequest(hypeDocument, element, event) {
         	if (window.matchMedia("(max-width : 375px) and (min-height : 812px)").matches) {
     			//hypeDocument.showLayoutNamed('iPhone 13 Mini')
@@ -38,17 +113,18 @@
   			} else if (window.matchMedia("(max-width : 414px) and (min-height : 896px)").matches) {
     			//hypeDocument.showLayoutNamed('iPhone 11')
     			return 'iPhone 11';
+  			} else if (window.matchMedia("(max-width : 320px) and (min-height : 693px)").matches) {
+    			//hypeDocument.showLayoutNamed('iPhone 11')
+    			return 'iPhone X Display Zoom';
   			}
     	}
 
     	if ("HYPE_eventListeners" in window === false) {
         	window.HYPE_eventListeners = Array();
     	}
+    	
     	window.HYPE_eventListeners.push({"type": "HypeDocumentLoad", "callback": callBack});
     	window.HYPE_eventListeners.push({"type": "HypeLayoutRequest", "callback": layoutRequest});
-		
-		let settingsAnimPlayed = false;
-		let currentLockTimelineTime = 0.0;
 	</script>
 	
 
@@ -58,7 +134,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?4647"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?96900"></script>
 	</div>
 
 	<!-- end copy -->
