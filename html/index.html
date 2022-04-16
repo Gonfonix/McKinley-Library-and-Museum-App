@@ -86,17 +86,28 @@
                     currentLayoutImages.push(images[i]);
                 }
 
-                if (randImageIndex === -1) {
+                /*if (randImageIndex === -1) {
                     randImageIndex = currentLayoutImages.length * Math.random() | 0;
+                } else */
+                
+                //window.webkit.messageHandlers.print.postMessage("--> " + randImageIndex);
+                
+                if (!appLoaded) {
+                	let newRandImageIndex = randImageIndex;
+                	while (newRandImageIndex === randImageIndex) {
+                		newRandImageIndex = currentLayoutImages.length * Math.random() | 0;
+                	}
+                	randImageIndex = newRandImageIndex;
+                	window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
                 }
 
                 let randImage = currentLayoutImages[randImageIndex]; // Select a random picture from the list of pictures
 
                 try {
-                    let fileName = hypeDoc.getElementProperty(randImage, 'background-image');
+                    //let fileName = hypeDoc.getElementProperty(randImage, 'background-image');
 
                     for (let i = 0; i < currentLayoutImages.length; i++) {
-                        if (hypeDoc.getElementProperty(currentLayoutImages[i], 'background-image') !== fileName) {
+                        if (currentLayoutImages[i] !== randImage) { // if (hypeDoc.getElementProperty(currentLayoutImages[i], 'background-image') !== fileName)
                             currentLayoutImages[i].style.opacity = 0;
                         } else {
                             currentLayoutImages[i].style.opacity = opacityForBackground;
@@ -202,7 +213,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?81764"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?46107"></script>
 	</div>
 
 	<!-- end copy -->
@@ -252,7 +263,7 @@ Email: Info@McKinleyMuseum.org
 		<div></div>
 		<div></div>
 		<div>Remember Me</div>
-		<div>Age</div>
+		<div>Birthday</div>
 		<div>Login</div>
 		<div>Already have an account? Login here</div>
 		<div></div>
