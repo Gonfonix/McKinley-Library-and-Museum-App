@@ -20,11 +20,18 @@
 	<link href='https://fonts.googleapis.com/css?family=Cinzel&subset=latin' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="Default.hyperesources/jquery-3.5.1.min.js"></script>
 	
-	<!--<style>
-		* {
-			pointer-events: none;
+	<style>
+		.Images {
+    		-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    		scrollbar-width: none;  /* Firefox */
 		}
-	</style>-->
+		.Images::-webkit-scrollbar { 
+    		display: none;  /* Safari and Chrome */
+		}
+		/** {
+			pointer-events: none;
+		}*/
+	</style>
 	
 	<script>
 		// Global Variables
@@ -90,15 +97,13 @@
                     randImageIndex = currentLayoutImages.length * Math.random() | 0;
                 } else */
                 
-                //window.webkit.messageHandlers.print.postMessage("--> " + randImageIndex);
-                
                 if (!appLoaded) {
                 	let newRandImageIndex = randImageIndex;
                 	while (newRandImageIndex === randImageIndex) {
                 		newRandImageIndex = currentLayoutImages.length * Math.random() | 0;
                 	}
                 	randImageIndex = newRandImageIndex;
-                	window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
+                	//window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
                 }
 
                 let randImage = currentLayoutImages[randImageIndex]; // Select a random picture from the list of pictures
@@ -213,7 +218,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?46107"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?71092"></script>
 	</div>
 
 	<!-- end copy -->
@@ -272,6 +277,14 @@ Email: Info@McKinleyMuseum.org
 		<div></div>
 		<div></div>
 		<div></div>
+		<div>image title
+</div>
+		<div>Image Description
+</div>
+		<div>Blah blah blah blah blah blah
+</div>
+		<div>Images
+</div>
 
 	</div>
 
