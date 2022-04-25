@@ -49,19 +49,94 @@
 		 * Content added here will be added to the Gallery portion of the app automatically on app load :)
 		*/
 		let galleryImages = [{
-                imageSrc: "",
-                imageTitle: "Image Title 1",
-                imageDescription: "Image Description 1"
+                imageSrc: "Default.hyperesources/DJI_0004.JPG", // File location for Image
+                imageTitle: "Image Title 1", // Name of Image or content
+                imageDescription: "Image Description 1" // Description of image or content
             },
             {
-                imageSrc: "", // File location for Image
+                imageSrc: "Default.hyperesources/DSC_2150.JPG", // File location for Image
                 imageTitle: "Image Title 2", // Name of Image or content
                 imageDescription: "Image Description 2" // Description of image or content
             },
             {
-                imageSrc: "", // File location for Image
+                imageSrc: "Default.hyperesources/DSC_2153.JPG", // File location for Image
                 imageTitle: "Image Title 3", // Name of Image or content
                 imageDescription: "Image Description 3" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2155.JPG", // File location for Image
+                imageTitle: "Image Title 4", // Name of Image or content
+                imageDescription: "Image Description 4" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2157.JPG", // File location for Image
+                imageTitle: "Image Title 5", // Name of Image or content
+                imageDescription: "Image Description 5" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2159.JPG", // File location for Image
+                imageTitle: "Image Title 6", // Name of Image or content
+                imageDescription: "Image Description 6" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2161.JPG", // File location for Image
+                imageTitle: "Image Title 7", // Name of Image or content
+                imageDescription: "Image Description 7" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2164-APPLEFIX.JPG", // File location for Image
+                imageTitle: "Image Title 8", // Name of Image or content
+                imageDescription: "Image Description 8" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2165.JPG", // File location for Image
+                imageTitle: "Image Title 9", // Name of Image or content
+                imageDescription: "Image Description 9" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2167.JPG", // File location for Image
+                imageTitle: "Image Title 10", // Name of Image or content
+                imageDescription: "Image Description 10" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2169.JPG", // File location for Image
+                imageTitle: "Image Title 11", // Name of Image or content
+                imageDescription: "Image Description 11" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2170.JPG", // File location for Image
+                imageTitle: "Image Title 12", // Name of Image or content
+                imageDescription: "Image Description 12" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2171.JPG", // File location for Image
+                imageTitle: "Image Title 13", // Name of Image or content
+                imageDescription: "Image Description 13" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2173.JPG", // File location for Image
+                imageTitle: "Image Title 14", // Name of Image or content
+                imageDescription: "Image Description 14" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2175.JPG", // File location for Image
+                imageTitle: "Image Title 15", // Name of Image or content
+                imageDescription: "Image Description 15" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2178.JPG", // File location for Image
+                imageTitle: "Image Title 16", // Name of Image or content
+                imageDescription: "Image Description 16" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2179.JPG", // File location for Image
+                imageTitle: "Image Title 17", // Name of Image or content
+                imageDescription: "Image Description 17" // Description of image or content
+            },
+            {
+                imageSrc: "Default.hyperesources/DSC_2183.JPG", // File location for Image
+                imageTitle: "Image Title 18", // Name of Image or content
+                imageDescription: "Image Description 18" // Description of image or content
             }
         ];
 		
@@ -132,7 +207,7 @@
                 		newRandImageIndex = currentLayoutImages.length * Math.random() | 0;
                 	}
                 	randImageIndex = newRandImageIndex;
-                	//window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
+                	window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
                 }
 
                 let randImage = currentLayoutImages[randImageIndex]; // Select a random picture from the list of pictures
@@ -247,7 +322,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?71842"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?22634"></script>
 	</div>
 
 	<!-- end copy -->
