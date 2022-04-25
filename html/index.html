@@ -21,13 +21,13 @@
 	<script type="text/javascript" src="Default.hyperesources/jquery-3.5.1.min.js"></script>
 	
 	<style>
-		.Images {
-    		-ms-overflow-style: none;  /* Internet Explorer 10+ */
-    		scrollbar-width: none;  /* Firefox */
-		}
-		.Images::-webkit-scrollbar { 
-    		display: none;  /* Safari and Chrome */
-		}
+/* 		.Images { */
+/*     		-ms-overflow-style: none;  /* Internet Explorer 10+ */ */
+/*     		scrollbar-width: none;  /* Firefox */ */
+/* 		} */
+/* 		.Images::-webkit-scrollbar {  */
+/*     		display: none;  /* Safari and Chrome */ */
+/* 		} */
 		/** {
 			pointer-events: none;
 		}*/
@@ -41,6 +41,29 @@
 		var randImageIndex = -1; // The index of the image to randomly be displayed when the app launches.
 		var navMenuOpening = true;
 		var appLoaded = false; // If true, the app has fully loaded.
+		var galleryLoaded = false; // If true, the gallery has already been setup and should NOT be reset-up.
+		
+		/*
+		 * Add Gallery Content Here!
+		 *
+		 * Content added here will be added to the Gallery portion of the app automatically on app load :)
+		*/
+		let galleryImages = [{
+                imageSrc: "",
+                imageTitle: "Image Title 1",
+                imageDescription: "Image Description 1"
+            },
+            {
+                imageSrc: "", // File location for Image
+                imageTitle: "Image Title 2", // Name of Image or content
+                imageDescription: "Image Description 2" // Description of image or content
+            },
+            {
+                imageSrc: "", // File location for Image
+                imageTitle: "Image Title 3", // Name of Image or content
+                imageDescription: "Image Description 3" // Description of image or content
+            }
+        ];
 		
 		/*
 		 * The Function Called on Document Load
@@ -56,6 +79,7 @@
 
                 let sceneNum = 1;
 				
+				// Get the current scene index number
                 for (let i = 0; i < hypeDoc.sceneNames().length; i++) {
                     if (hypeDoc.sceneNames()[i] === hypeDoc.currentSceneName()) {
                         if (i !== 0) {
@@ -69,16 +93,19 @@
 
                 let currentLayoutIndex = 0; // This will be the current index of the given layout based on all layouts added up from every scene
 
+				// Get the current layout index number
                 for (let i = 0; i < layoutsForScene.length; i++) {
                     if (layoutsForScene[i].name === hypeDoc.currentLayoutName()) {
                         currentLayoutIndex = i;
                     }
                 }
 
-                let images = document.querySelectorAll('.backgroundImage'); // Get all images from every scene
+                let images = document.querySelectorAll('.backgroundImage'); // Get all images from every layout and scene
 
 				let pointer = 0;
 				
+				// If the sceneNum is NOT equal to 1, then we need to create a "pointer" or an offset. This pointer/offset will be used to get the image we're looking for all scenes other then the home screen
+				// (since some additional math is required when retrieving images past the home screen)
 				if (sceneNum !== 1) {
 					pointer = 8 * (sceneNum - 1);
 				}
@@ -89,6 +116,8 @@
 
                 let currentLayoutImages = [];
 				
+				// Retrieve the images loaded on the current layout of the current scene ONLY
+				// i will equal the first image of the current layout on the current scene. We will add all images from here.
                 for (let i = (currentLayoutIndex + pointer) * numOfImagesPerLayout; i < ((currentLayoutIndex + pointer) * numOfImagesPerLayout) + numOfImagesPerLayout; i++) {
                     currentLayoutImages.push(images[i]);
                 }
@@ -103,7 +132,7 @@
                 		newRandImageIndex = currentLayoutImages.length * Math.random() | 0;
                 	}
                 	randImageIndex = newRandImageIndex;
-                	//window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
+                	window.webkit.messageHandlers.setNewBackgroundColor.postMessage(randImageIndex); // Forward the latest background color index selected to Swift through WebKit
                 }
 
                 let randImage = currentLayoutImages[randImageIndex]; // Select a random picture from the list of pictures
@@ -119,7 +148,7 @@
                         }
                     }
                 } catch (e) {
-                    //console.log("ERROR:",e)
+                    //window.webkit.messageHandlers.print.postMessage("Error when setting background on scene:" + e);
                 }
             }
 
@@ -218,7 +247,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?71092"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?64723"></script>
 	</div>
 
 	<!-- end copy -->
@@ -277,11 +306,13 @@ Email: Info@McKinleyMuseum.org
 		<div></div>
 		<div></div>
 		<div></div>
-		<div>image title
-</div>
 		<div>Image Description
 </div>
 		<div>Blah blah blah blah blah blah
+</div>
+		<div>image title
+</div>
+		<div>Image Title
 </div>
 		<div>Images
 </div>
