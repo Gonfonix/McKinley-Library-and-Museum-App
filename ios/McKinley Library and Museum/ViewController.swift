@@ -5,6 +5,14 @@ import UIKit
 import WebKit
 
 class ViewController: UIViewController, UIScrollViewDelegate, WKUIDelegate, WKScriptMessageHandler {
+    
+    // User Account Credentials
+    var email: String!
+    var password: String!
+    var firstName: String!
+    var lastName: String!
+    var birthday: String! // Birthday stored as String format
+    
     // Intercept JavaScript code from the web app
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "setNewBackgroundColor", let messageBody = message.body as? Int {
@@ -19,11 +27,39 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKUIDelegate, WKSc
             print(messageBody)
         } else if message.name == "print", let messageBody = message.body as? String {
             print(messageBody)
+        } else if message.name == "signupLoginEmail", let messageBody = message.body as? String {
+            email = messageBody // Store the user's email address
+        } else if message.name == "signupLoginPassword", let messageBody = message.body as? String {
+            password = messageBody // Store the user's password
+        } else if message.name == "signupFirstName", let messageBody = message.body as? String {
+            firstName = messageBody // Store the user's first name
+        } else if message.name == "signupLastName", let messageBody = message.body as? String {
+            lastName = messageBody // Store the user's last name
+        } else if message.name == "signupBirthday", let messageBody = message.body as? String {
+            birthday = messageBody // Store the user's birthday
+        } else if message.name == "processSignup" {
+            /// Process Signup for Account Based on Variables Initialized
+        } else if message.name == "processLogin" {
+            /// Process Login for Account Based on Variables Initialized
         }
     }
     
     //var wv: WKWebView!
     var webView = WKWebView()
+    
+    // Log the User In
+    // Proof of Concept!
+    func logUserIntoAccount(_ userContentController: WKUserContentController) {
+        // Verify Login Credentials...
+        
+        // Once verified, pass necessary information back to the app...
+        let javaScript = ";" // ---> The Information to pass we ran as a JS Script
+        
+        let processLogin = WKUserScript(source: javaScript,
+                                      injectionTime: .atDocumentEnd,
+                                      forMainFrameOnly: true)
+        userContentController.addUserScript(processLogin)
+    }
     
     override func loadView() {
         let wc = WKWebViewConfiguration()
@@ -48,10 +84,22 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKUIDelegate, WKSc
                                       forMainFrameOnly: true)
         userContentController.addUserScript(setDataCollectionEnabled)
         
+        // Log the User in
+        logUserIntoAccount(userContentController)
+        
         // Setup the processes for intercepting JavaScript code from the web app
         userContentController.add(self, name: "setNewBackgroundColor")
         userContentController.add(self, name: "enableDataCollection")
         userContentController.add(self, name: "collectData")
+        
+        userContentController.add(self, name: "signupLoginEmail")
+        userContentController.add(self, name: "signupLoginPassword")
+        userContentController.add(self, name: "signupFirstName")
+        userContentController.add(self, name: "signupLastName")
+        userContentController.add(self, name: "signupBirthday")
+        userContentController.add(self, name: "processSignup")
+        userContentController.add(self, name: "processLogin")
+        
         userContentController.add(self, name: "print") // Will be used to print data out to the console
         wc.userContentController = userContentController
         
