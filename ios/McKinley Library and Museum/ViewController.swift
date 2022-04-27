@@ -10,6 +10,13 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKUIDelegate, WKSc
         if message.name == "setNewBackgroundColor", let messageBody = message.body as? Int {
             print("New Background Color (Index): \(messageBody)") // DEBUG: Print out the index of the current background color
             UserDefaults.standard.set(messageBody, forKey: "previousBackgroundColor") // Store the latest background color index in UserDefaults
+        } else if message.name == "enableDataCollection", let messageBody = message.body as? Bool {
+            UserDefaults.standard.set(messageBody, forKey: "dataCollectionEnabled")
+        } else if message.name == "collectData", let messageBody = message.body as? String {
+            /*
+             * Normally, here we would send the data we've collected somewhere. However, for now, we will just print the data out to the console...
+             */
+            print(messageBody)
         } else if message.name == "print", let messageBody = message.body as? String {
             print(messageBody)
         }
@@ -34,8 +41,17 @@ class ViewController: UIViewController, UIScrollViewDelegate, WKUIDelegate, WKSc
                                       forMainFrameOnly: true)
         userContentController.addUserScript(setPreviousBackgroundColor)
         
+        let javaScript2 = "optInDataCollection = \(UserDefaults.standard.bool(forKey: "dataCollectionEnabled"));"
+        
+        let setDataCollectionEnabled = WKUserScript(source: javaScript2,
+                                      injectionTime: .atDocumentEnd,
+                                      forMainFrameOnly: true)
+        userContentController.addUserScript(setDataCollectionEnabled)
+        
         // Setup the processes for intercepting JavaScript code from the web app
         userContentController.add(self, name: "setNewBackgroundColor")
+        userContentController.add(self, name: "enableDataCollection")
+        userContentController.add(self, name: "collectData")
         userContentController.add(self, name: "print") // Will be used to print data out to the console
         wc.userContentController = userContentController
         

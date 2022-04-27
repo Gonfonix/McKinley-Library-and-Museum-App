@@ -40,12 +40,15 @@
 		var currentFeaturedImageTimelinePos = 0;
 		var currentMainTimelinePos = 0;
 		var currentNavMenuTimelinePos = 0;
-		var timeLineFPS = 120; // The framerate of certain timeline animations (currently only gallery animations); but as of writing this, Pro Motion still won't detect the higher framerates. This is subject to change, however.
+		var timeLineFPS = 60; // The framerate of certain timeline animations (currently only gallery animations); but as of writing this, Pro Motion still won't detect the higher framerates. This is subject to change, however.
 		// For zero bugs with animation delays on low power mode, use 60 fps. However, once Pro Motion is supported, 120 will result in smoother animations. The only drawback is the lower power mode bug.
 		var randImageIndex = -1; // The index of the image to randomly be displayed when the app launches.
 		var navMenuOpening = true;
 		var appLoaded = false; // If true, the app has fully loaded.
 		var galleryLoaded = false; // If true, the gallery has already been setup and should NOT be reset-up.
+		
+		// Data Collection
+		var optInDataCollection = false; // If true, the user has opted in data collection.
 		
 		/*
 		 * Add Gallery Content Here!
@@ -152,6 +155,15 @@
 		function callBack(hypeDocument, element, event) {
             window.hypeDocument = hypeDocument;
 
+			/*
+			 * Data Collecting
+			*/
+			hypeDocument.collectData = function(data) {
+				if (optInDataCollection) {
+					window.webkit.messageHandlers.print.postMessage(data);
+				}
+			}
+			
 			/* 
              * Choose an Image for the Background Randomly
             */
@@ -229,7 +241,9 @@
                         }
                     }
                 } catch (e) {
-                    //window.webkit.messageHandlers.print.postMessage("Error when setting background on scene:" + e);
+                    if (optInDataCollection) {
+                    	hypeDoc.collectData("Error when setting background on scene:" + e);
+                    }
                 }
             }
 
@@ -328,7 +342,7 @@
 	<!-- copy these lines to your document: -->
 
 	<div id="default_hype_container" class="HYPE_document" style="margin:auto;position:relative;width:100%;height:100%;overflow:hidden;">
-		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?31260"></script>
+		<script type="text/javascript" charset="utf-8" src="Default.hyperesources/default_hype_generated_script.js?74576"></script>
 	</div>
 
 	<!-- end copy -->
@@ -397,6 +411,8 @@ Email: Info@McKinleyMuseum.org
 </div>
 		<div>Image Title
 </div>
+		<div>Allow Data Collection?</div>
+		<div>Settings</div>
 
 	</div>
 
